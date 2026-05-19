@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Johannes Kasinger | Tilburg University (TiSEM)</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <style>
+        :root {
+            --text-color: #1a3c34;
+            --bg-color: #fff;
+            --link-color: #1a3c34;
+            --link-hover: #2a6e5a;
+            --muted: #4a6e63;
+            --border: #ddd;
+            --section-gap: 3em;
+            --max-width: 920px;
+            --nav-height: 48px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.65;
+            color: var(--text-color);
+            background: var(--bg-color);
+            padding: 0 1.5em 2em 1.5em;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-color);
+            padding: 1em 0;
+            margin-bottom: 3em;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.95em;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 0 1.6em;
+            color: var(--text-color);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: var(--link-hover);
+            text-decoration: none;
+        }
+
+        .intro {
+            display: flex;
+            gap: 2.6em;
+            align-items: stretch;
+            margin-bottom: var(--section-gap);
+        }
+
+        .intro-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .intro img {
+            width: 230px;
+            height: auto;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .intro-text h1 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin-bottom: 0.15em;
+        }
+
+        .intro-text .position {
+            font-size: 0.95em;
+            color: var(--muted);
+            margin-bottom: 0.8em;
+        }
+
+        .intro-text p {
+            font-size: 0.88em;
+            margin-bottom: 0.6em;
+        }
+
+        .contact-links {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3em;
+            font-size: 0.85em;
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .contact-links a:hover {
+            color: var(--text-color);
+        }
+
+        section {
+            margin-bottom: var(--section-gap);
+            scroll-margin-top: calc(var(--nav-height) + 10px);
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 0.8em;
+            padding-bottom: 0.3em;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h3 {
+            font-size: 1.12em;
+            font-weight: 600;
+            font-style: italic;
+            margin-top: 3.5em;
+            margin-bottom: 1.8em;
+            padding-bottom: 0.25em;
+        }
+
+        h2 + h3 {
+            margin-top: 2em;
+        }
+
+        h3::after {
+            content: "";
+            display: block;
+            width: 35%;
+            height: 1px;
+            background: var(--border);
+            margin-top: 0.3em;
+        }
+
+        .paper {
+            margin-top: 1.3em;
+            margin-bottom: 1.3em;
+        }
+
+        .paper .title {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .paper .title a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .paper .title a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        .paper .authors {
+            font-size: 0.88em;
+            color: var(--muted);
+        }
+
+        .paper .authors a {
+            color: var(--muted);
+        }
+
+        .paper .authors a:hover {
+            color: var(--text-color);
+        }
+
+        .paper .venue {
+            font-size: 0.88em;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .paper .links {
+            font-size: 0.85em;
+            margin-top: 0.2em;
+        }
+
+        .paper .links a {
+            margin-right: 0.8em;
+        }
+
+        .paper .media {
+            font-size: 0.82em;
+            color: var(--muted);
+            margin-top: 0.15em;
+        }
+
+        .paper .media a {
+            color: var(--muted);
+        }
+
+        .paper .media a:hover {
+            color: var(--text-color);
+        }
+
+        .paper .abstract-toggle {
+            font-size: 0.85em;
+            cursor: pointer;
+            color: var(--link-color);
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+            text-decoration: underline;
+        }
+
+        .paper .abstract-toggle:hover {
+            color: var(--link-hover);
+        }
+
+        .paper .abstract-text {
+            display: none;
+            font-size: 0.87em;
+            color: var(--muted);
+            margin-top: 0.4em;
+            padding: 0.6em 0.8em;
+            background: #f8f8f8;
+            border-radius: 4px;
+            line-height: 1.55;
+        }
+
+        .paper .abstract-text.show {
+            display: block;
+        }
+
+        .wip-item {
+            margin-bottom: 0.7em;
+        }
+
+        .wip-item .wip-title {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .wip-item .wip-authors {
+            font-size: 0.88em;
+            color: var(--muted);
+        }
+
+        .wip-item .wip-authors a {
+            color: var(--muted);
+        }
+
+        .wip-item .wip-authors a:hover {
+            color: var(--text-color);
+        }
+
+        .policy-item {
+            margin-bottom: 0.9em;
+        }
+
+        .policy-item .policy-title {
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+
+        .policy-item .policy-title a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .policy-item .policy-title a:hover {
+            color: var(--link-hover);
+            text-decoration: underline;
+        }
+
+        .policy-item .policy-authors {
+            font-size: 0.88em;
+            color: var(--muted);
+        }
+
+        .policy-item .policy-authors a {
+            color: var(--muted);
+        }
+
+        .policy-item .policy-authors a:hover {
+            color: var(--text-color);
+        }
+
+        .policy-item .policy-venue {
+            font-size: 0.88em;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .cv-section p {
+            font-size: 0.93em;
+        }
+
+        .cv-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4em;
+            padding: 0.5em 1.2em;
+            background: var(--text-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            margin-top: 0.6em;
+        }
+
+        .cv-download:hover {
+            background: var(--muted);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer {
+            margin-top: 3em;
+            padding-top: 1em;
+            border-top: 1px solid var(--border);
+            font-size: 0.82em;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 0 1.2em 1.5em 1.2em;
+            }
+
+            .intro {
+                gap: 1.8em;
+            }
+
+            .intro img {
+                width: 190px;
+            }
+
+            h2 {
+                font-size: 1.35em;
+            }
+
+            h3 {
+                margin-top: 2.5em;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 15px;
+                padding: 0 1em 1.5em 1em;
+            }
+
+            nav {
+                padding: 0.7em 0;
+                margin-bottom: 2em;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.3em 0;
+            }
+
+            nav a {
+                margin: 0 0.7em;
+                font-size: 0.9em;
+            }
+
+            .intro {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 1.2em;
+            }
+
+            .intro img {
+                width: 160px;
+            }
+
+            .intro-text h1 {
+                font-size: 1.4em;
+            }
+
+            .intro-text .position {
+                font-size: 0.88em;
+            }
+
+            .intro-text p {
+                font-size: 0.85em;
+            }
+
+            .contact-links {
+                justify-content: center;
+                margin-top: 0.8em;
+                gap: 0.5em;
+            }
+
+            .contact-links a {
+                font-size: 0.8em;
+            }
+
+            h2 {
+                font-size: 1.25em;
+                margin-bottom: 0.6em;
+            }
+
+            h3 {
+                font-size: 1em;
+                margin-top: 2.5em;
+                margin-bottom: 1.2em;
+            }
+
+            h2 + h3 {
+                margin-top: 1.2em;
+            }
+
+            h3::after {
+                width: 50%;
+            }
+
+            .paper {
+                margin-top: 1em;
+                margin-bottom: 1em;
+            }
+
+            .paper .title {
+                font-size: 0.9em;
+            }
+
+            .paper .authors,
+            .paper .venue {
+                font-size: 0.83em;
+            }
+
+            .paper .links {
+                font-size: 0.8em;
+            }
+
+            .paper .abstract-text {
+                font-size: 0.82em;
+                padding: 0.5em 0.6em;
+            }
+
+            .paper .media {
+                font-size: 0.78em;
+            }
+
+            .wip-item .wip-title {
+                font-size: 0.9em;
+            }
+
+            .wip-item .wip-authors {
+                font-size: 0.83em;
+            }
+
+            .policy-item .policy-title {
+                font-size: 0.9em;
+            }
+
+            .policy-item .policy-authors,
+            .policy-item .policy-venue {
+                font-size: 0.83em;
+            }
+
+            .cv-section p {
+                font-size: 0.88em;
+            }
+
+            .cv-download {
+                font-size: 0.85em;
+                padding: 0.45em 1em;
+            }
+
+            footer {
+                font-size: 0.78em;
+                margin-top: 2em;
+            }
+
+            :root {
+                --section-gap: 2em;
+            }
+        }
+
+        @media (max-width: 380px) {
+            nav a {
+                margin: 0 0.5em;
+                font-size: 0.85em;
+            }
+
+            .intro img {
+                width: 140px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 0.3em;
+            }
+
+            .contact-links span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#research">Research</a>
+    <a href="#policy">Policy</a>
+    <a href="CV_Kasinger.pdf" target="_blank">Download CV</a>
+</nav>
+
+<div class="intro" id="home" style="scroll-margin-top: calc(var(--nav-height) + 10px);">
+    <img src="photo.jpg" alt="Johannes Kasinger">
+    <div class="intro-text">
+        <h1>Johannes Kasinger</h1>
+        <div class="position">Assistant Professor of Marketing, Tilburg University (TiSEM)</div>
+
+        <p>
+            I am an Assistant Professor of Marketing at the Tilburg School of Economics
+            and Management (TiSEM) and a Research Affiliate at the Leibniz Institute for
+            Financial Research SAFE.
+        </p>
+        <p>
+            My research applies microeconometric methods and economic theory to study
+            policy-relevant questions at the intersection of industrial organization,
+            behavioral economics, public economics, and quantitative marketing.
+            Individual information processing and obfuscation practices, where firms
+            exploit consumers' inattention and biases to increase profits, are central
+            themes in most of my papers.
+        </p>
+
+        <div class="contact-links">
+            <a href="mailto:j.kasinger@tilburguniversity.edu" title="Email">j.kasinger@tilburguniversity.edu</a>
+            <span style="color: var(--border);">|</span>
+            <a href="https://www.linkedin.com/in/johannes-kasinger-b230131a1/" target="_blank" title="LinkedIn">LinkedIn</a>
+            <span style="color: var(--border);">|</span>
+            <a href="https://scholar.google.com/citations?user=J6KZM2sAAAAJ&hl=en" target="_blank" title="Google Scholar">Scholar</a>
+            <span style="color: var(--border);">|</span>
+            <a href="CV_Kasinger.pdf" target="_blank" title="CV">CV</a>
+        </div>
+    </div>
+</div>
+
+<section id="research">
+    <h2>Research</h2>
+
+    <h3>Publications &amp; Accepted Articles</h3>
+
+    <div class="paper">
+        <div class="title"><a href="https://www.aeaweb.org/articles?id=10.1257/pol.20240889&amp;&amp;from=f" target="_blank">The Pass-Through of Retail Crime</a></div>
+        <div class="authors">with <a href="https://www.carlhase.com/" target="_blank">C. Hase</a></div>
+        <div class="venue">American Economic Journal: Economic Policy, forthcoming</div>
+        <div class="links">
+            <a href="https://www.aeaweb.org/articles?id=10.1257/pol.20240889&amp;&amp;from=f" target="_blank">[Paper]</a>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">[ + Abstract]</button>
+        </div>
+        <div class="abstract-text">
+            This paper shows that retailers increase prices in response to organized retail crime. We match store-level crime data to scanner data from the universe of transactions for cannabis retailers in Washington state. Using quasi-experimental variation from robberies and burglaries, we find a 1.5&ndash;1.8% price increase at victimized stores and nearby competitors. This rise is not driven by short-to-medium-term demand changes but is consistent with an own-cost shock. Effects are larger for independent stores and less concentrated markets. We estimate that crime imposes a 1% &ldquo;hidden&rdquo; unit tax on affected stores, implying $33.9 million additional social costs, primarily borne by consumers.
+        </div>
+    </div>
+
+    <div class="paper">
+        <div class="title"><a href="https://pubsonline.informs.org/doi/10.1287/mksc.2024.0948" target="_blank">Shrinkflation and Consumer Demand</a></div>
+        <div class="authors">with <a href="https://aljoschajanssen.com/" target="_blank">A. Janssen</a></div>
+        <div class="venue">Marketing Science, 2026, 45(1), 142&ndash;158</div>
+        <div class="links">
+            <a href="https://pubsonline.informs.org/doi/10.1287/mksc.2024.0948" target="_blank">[Paper]</a>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">[ + Abstract]</button>
+        </div>
+        <div class="abstract-text">
+            This study investigates shrinkflation&mdash;the practice of reducing product size while maintaining or slightly changing prices&mdash;in the U.S. retail grocery market. We analyze a decade of retail scanner data to assess the prevalence and patterns of product size changes across various product categories. Our findings show that approximately 1.92% of products have been downsized. When comparing total sales, product downsizing is more than five times as prevalent as upsizing. Product downsizing typically occurs without a corresponding decrease in price and is widespread across product categories. Consequently, consumers end up paying more per unit volume. We further find that consumers are more responsive to price adjustments than to changes in product size. This finding suggests that reducing product sizes is an effective strategy for retailers and manufacturers to increase margins or respond to cost pressures, offering valuable implications for retailers and policymakers.
+        </div>
+        <div class="media">Media: <a href="https://www.tilburguniversity.edu/magazine/overview/consumers-react-more-price-product-size-changes" target="_blank">Tilburg University</a></div>
+    </div>
+
+    <div class="paper">
+        <div class="title"><a href="https://link.springer.com/article/10.1007/s11129-025-09292-9" target="_blank">Discrete Choice in Marketing through the Lens of Rational Inattention</a></div>
+        <div class="authors">with <a href="https://sites.google.com/site/econsergeyturlo" target="_blank">S. Turlo</a>, <a href="https://www.marketing.uni-frankfurt.de/professoren/otter/wissenschaftliche-mitarbeiter/matteo-fina.html" target="_blank">M. Fina</a>, <a href="https://www.arashlaghaie.com/" target="_blank">A. Laghaie</a> &amp; <a href="https://www.marketing.uni-frankfurt.de/professoren/otter/prof-dr-thomas-otter.html" target="_blank">T. Otter</a></div>
+        <div class="venue">Quantitative Marketing and Economics, 2025, 23, 45&ndash;104</div>
+        <div class="links">
+            <a href="https://link.springer.com/article/10.1007/s11129-025-09292-9" target="_blank">[Paper]</a>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">[ + Abstract]</button>
+        </div>
+        <div class="abstract-text">
+            Models derived from random utility theory represent the workhorse methods to learn about consumer preferences from discrete choice data. However, a large body of literature documents various behavioral patterns that cannot be captured by basic random utility models and require different non-unified adjustments to accommodate these patterns. In this article, we discuss strategies how to apply rational inattention theory&mdash;which explains a large variety of such departures&mdash;to the analysis of discrete choice among multiple alternatives described along multiple attributes. We first review existing applications that make restrictive belief assumptions to obtain choice probabilities in closed multinomial logit form. We then propose a model that allows for general consumer beliefs and demonstrate its empirical identification. Further, we illustrate how this model naturally motivates stylized empirical results that are hard to reconcile from a random utility perspective.
+        </div>
+    </div>
+
+    <div class="paper">
+        <div class="title"><a href="https://www.sciencedirect.com/science/article/pii/S0899825624001131" target="_blank">Skewness Preferences: Evidence from Online Poker</a></div>
+        <div class="authors">with <a href="https://sites.google.com/site/markusdertwinkelkalt/" target="_blank">M. Dertwinkel-Kalt</a> &amp; D. Schneider</div>
+        <div class="venue">Games and Economic Behavior, 2024, 147, 460&ndash;484</div>
+        <div class="links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0899825624001131" target="_blank">[Paper]</a>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">[ + Abstract]</button>
+        </div>
+        <div class="abstract-text">
+            We test for skewness preferences in a large set of observational panel data on online poker games (n=4,450,585). Each observation refers to a choice between a safe option and a binary risk of winning or losing the game. Our setting offers a real-world choice situation with substantial incentives where probability distributions are simple, transparent, and known to the decision-makers. Individuals reveal a strong and robust preference for skewness, which is inconsistent with expected utility theory. The effect of skewness is most pronounced among experienced and unsuccessful players but remains significant in all subsamples that we investigate, in contrast to the effect of variance.
+        </div>
+    </div>
+
+    <div class="paper">
+        <div class="title"><a href="https://onlinelibrary.wiley.com/doi/10.1111/joie.12362" target="_blank">Obfuscation and Rational Inattention</a></div>
+        <div class="authors">with <a href="https://aljoschajanssen.com/" target="_blank">A. Janssen</a></div>
+        <div class="venue">Journal of Industrial Economics, 2024, 72(1), 390&ndash;428</div>
+        <div class="links">
+            <a href="https://onlinelibrary.wiley.com/doi/10.1111/joie.12362" target="_blank">[Paper]</a>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">[ + Abstract]</button>
+        </div>
+        <div class="abstract-text">
+            We study the behavior of duopolistic firms that can obfuscate their prices before competing on price. Obfuscation affects the rational inattentive consumers&rsquo; optimal information strategy, which determines the probabilistic demand. Our model advances related models by allowing consumers to update their unrestricted prior beliefs with an informative signal of any form. We show that the game may result in an obfuscation equilibrium with high prices or a transparency equilibrium with low prices and no obfuscation, providing an argument for market regulation. Obfuscation equilibria cease to exist for low information costs and if one firm seems a priori considerably more attractive.
+        </div>
+    </div>
+
+    <div class="paper">
+        <div class="title"><a href="https://www.sciencedirect.com/science/article/pii/S0014292123002210" target="_blank">Shared E-Scooter Services and Road Safety: Evidence from Six European Countries</a></div>
+        <div class="authors">with <a href="https://cannoncloud.github.io/" target="_blank">C. Cloud</a> &amp; <a href="https://hesss.org/" target="_blank">S. He&szlig;</a></div>
+        <div class="venue">European Economic Review, 2023, 160, 104593</div>
+        <div class="links">
+            <a href="https://www.sciencedirect.com/science/article/pii/S0014292123002210" target="_blank">[Paper]</a>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">[ + Abstract]</button>
+        </div>
+        <div class="abstract-text">
+            We estimate the causal effect of shared e-scooter services on traffic accidents by exploiting the variation in the availability of e-scooter services induced by the staggered rollout across 93 cities in six countries. Police-reported accidents involving personal injuries in the average month increased by around 8.2% after shared e-scooters were introduced. Effects are large during summer and insignificant during winter. Further heterogeneity analysis reveals the largest estimated effects for cities with limited cycling infrastructure, while no effects are detectable in cities with high bike-lane density. This difference suggests that public policy can play a crucial role in mitigating accidents related to e-scooters and, more generally, to changes in urban mobility.
+        </div>
+        <div class="media">Media: <a href="https://www.tilburguniversity.edu/current/press-releases/rise-traffic-accidents-introduction-shared-e-scooters" target="_blank">Tilburg University</a>, <a href="https://nltimes.nl/tags/johannes-kasinger" target="_blank">NL Times</a></div>
+    </div>
+
+    <h3>Working Papers</h3>
+
+    <div class="paper">
+        <div class="title"><a href="https://arxiv.org/abs/2409.01493" target="_blank">Shrouded Sin Taxes</a></div>
+        <div class="authors">Johannes Kasinger</div>
+        <div class="links">
+            <a href="https://arxiv.org/abs/2409.01493" target="_blank">[Paper]</a>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">[ + Abstract]</button>
+        </div>
+        <div class="abstract-text">
+            Strategic shrouding of taxes by profit-maximizing firms can impair the effectiveness of corrective taxes. This paper explores tax shrouding and its consequences after the introduction of a digital sin tax designed to discourage harmful overconsumption of online sports betting in Germany. In response to the tax reform, most firms strategically shroud the tax, i.e., exclude tax surcharges from posted prices. Using an extensive novel panel data set on online betting odds, I causally estimate the effect of the tax on consumer betting prices. Consumers bear, on average, 76% of the tax burden. There is considerable and long-lasting heterogeneity in effects conditional on shrouding practices. Firms that shroud taxes can pass 90% of the tax onto consumers, while the pass-through rate is 16% for firms that directly post tax-inclusive prices. To understand the results&rsquo; underlying mechanisms and policy implications, I propose an optimal corrective taxation model where oligopolistic firms compete on base prices and can shroud additive taxes. Tax shrouding is only attainable in equilibrium if (some) consumers underreact to shrouded attributes. According to the theoretical predictions, the empirically identified heterogeneity suggests that strategic tax shrouding significantly attenuates the positive corrective welfare effects of the tax. The results prompt regulating shrouding practices in the context of corrective taxation.
+        </div>
+    </div>
+
+    <div class="paper">
+        <div class="title"><a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4260867" target="_blank">Disparities in Financial Literacy, Pension Planning, and Saving Behavior</a></div>
+        <div class="authors">with <a href="https://www.bwl.uni-mannheim.de/bucher-koenen/" target="_blank">T. Bucher-Koenen</a>, <a href="https://www.old.wiwi.uni-frankfurt.de/de/abteilungen/finance/lehrstuhl/prof-dr-andreas-hackethal/team/prof-dr-hackethal.html" target="_blank">A. Hackethal</a> &amp; <a href="https://sites.google.com/site/christinexlaudenbach/" target="_blank">C. Laudenbach</a></div>
+        <div class="links">
+            <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4260867" target="_blank">[Paper]</a>
+            <button class="abstract-toggle" onclick="toggleAbstract(this)">[ + Abstract]</button>
+        </div>
+        <div class="abstract-text">
+            Financial literacy affects wealth accumulation, and pension planning plays a key role in this relationship. In a large field experiment, we employ a digital pension aggregation tool to confront a treatment group with a simplified overview of their current pension claims across all pillars of the pension system. We combine survey and administrative bank data to measure the effects on actual saving behavior. Access to the tool decreases pension uncertainty for treated individuals. Average savings increase&mdash;especially for the financially less literate. We conclude that simplification of pension information can potentially reduce disparities in pension planning and savings behavior.
+        </div>
+    </div>
+
+    <h3>Work in Progress</h3>
+
+    <div class="wip-item">
+        <div class="wip-title">Who Bears the Burden of Digital Services Taxes?</div>
+        <div class="wip-authors">with <a href="https://www.wu.ac.at/en/imsm/about-us/team/isin-acun" target="_blank">I. Acun</a> &amp; <a href="https://www.wu.ac.at/en/imsm/about-us/team/nadia-abou-nabout" target="_blank">N. Abou Nabout</a></div>
+    </div>
+
+    <div class="wip-item">
+        <div class="wip-title">Demand Estimation with Costly Attribute Information Integration</div>
+        <div class="wip-authors">with <a href="https://sites.google.com/site/econsergeyturlo" target="_blank">S. Turlo</a>, <a href="https://www.marketing.uni-frankfurt.de/professoren/otter/wissenschaftliche-mitarbeiter/matteo-fina.html" target="_blank">M. Fina</a>, <a href="https://www.arashlaghaie.com/" target="_blank">A. Laghaie</a> &amp; <a href="https://www.marketing.uni-frankfurt.de/professoren/otter/prof-dr-thomas-otter.html" target="_blank">T. Otter</a></div>
+    </div>
+
+    <div class="wip-item">
+        <div class="wip-title">Self-Checkout and Crime</div>
+        <div class="wip-authors">with <a href="https://aljoschajanssen.com/" target="_blank">A. Janssen</a></div>
+    </div>
+
+    <div class="wip-item">
+        <div class="wip-title">When Simpler is Worse: The Adverse Effects of Information Simplification in Discrete Choice</div>
+        <div class="wip-authors">with <a href="https://sites.google.com/site/econsergeyturlo" target="_blank">S. Turlo</a>, <a href="https://www.marketing.uni-frankfurt.de/professoren/otter/wissenschaftliche-mitarbeiter/matteo-fina.html" target="_blank">M. Fina</a>, <a href="https://www.arashlaghaie.com/" target="_blank">A. Laghaie</a> &amp; <a href="https://www.marketing.uni-frankfurt.de/professoren/otter/prof-dr-thomas-otter.html" target="_blank">T. Otter</a></div>
+    </div>
+
+    <div class="wip-item">
+        <div class="wip-title">Cross-Country Pricing Differences and Search Frictions</div>
+        <div class="wip-authors">with <a href="https://www.tilburguniversity.edu/staff/bart-bronnenberg" target="_blank">B. Bronnenberg</a>, <a href="https://www.tilburguniversity.edu/staff/m-j-pachali" target="_blank">M. Pachali</a> &amp; <a href="https://www.tilburguniversity.edu/staff/a-vanlin" target="_blank">A. van Lin</a></div>
+    </div>
+
+    <div class="wip-item">
+        <div class="wip-title">Inflation Inequality and Electoral Outcomes</div>
+        <div class="wip-authors">with <a href="https://www.carlhase.com/" target="_blank">C. Hase</a> &amp; <a href="https://aljoschajanssen.com/" target="_blank">A. Janssen</a></div>
+    </div>
+
+</section>
+
+<section id="policy">
+    <h2>Policy Publications &amp; Contributions</h2>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://www.hks.harvard.edu/centers/mrcbg/publications/awp/awp177" target="_blank">The Geography of Banks in the United States (1990&ndash;2020)</a></div>
+        <div class="policy-authors">with <a href="https://safe-frankfurt.de/policy-center/about/safe-senior-fellows/ignazio-angeloni.html" target="_blank">I. Angeloni</a> &amp; C. Tantasith</div>
+        <div class="policy-venue">Harvard Kennedy School M-RCBG Associate Working Paper No. 177, 2021</div>
+    </div>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://cepr.org/voxeu/columns/preparing-wave-non-performing-loans-empirical-insights-and-important-lessons" target="_blank">Preparing for a Wave of Non-Performing Loans: Empirical Insights and Important Lessons</a></div>
+        <div class="policy-authors">with <a href="https://safe-frankfurt.de/research/researchers/researchers-details/showauthor/14-krahnen.html" target="_blank">J.P. Krahnen</a>, <a href="https://sites.google.com/site/stevenongena/" target="_blank">S. Ongena</a>, <a href="https://safe-frankfurt.de/research/researchers/researchers-details/showauthor/82-pelizzon.html" target="_blank">L. Pelizzon</a>, <a href="https://sites.google.com/site/maikschmeling/Home" target="_blank">M. Schmeling</a> &amp; <a href="https://www.old.wiwi.uni-frankfurt.de/en/departments/finance/lehrstuhl/prof-dr-mark-wahrenburg/team/prof-dr-wahrenburg.html" target="_blank">M. Wahrenburg</a></div>
+        <div class="policy-venue">VoxEU Column, April 2021</div>
+    </div>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://safe-frankfurt.de/policy-center/policy-publications/policy-publ-detailsview/publicationname/non-performing-loans-new-risks-and-policies.html" target="_blank">Non-Performing Loans &ndash; New Risks and Policies? NPL Resolution after COVID-19</a></div>
+        <div class="policy-authors">with <a href="https://safe-frankfurt.de/research/researchers/researchers-details/showauthor/14-krahnen.html" target="_blank">J.P. Krahnen</a>, <a href="https://sites.google.com/site/stevenongena/" target="_blank">S. Ongena</a>, <a href="https://safe-frankfurt.de/research/researchers/researchers-details/showauthor/82-pelizzon.html" target="_blank">L. Pelizzon</a>, <a href="https://sites.google.com/site/maikschmeling/Home" target="_blank">M. Schmeling</a> &amp; <a href="https://www.old.wiwi.uni-frankfurt.de/en/departments/finance/lehrstuhl/prof-dr-mark-wahrenburg/team/prof-dr-wahrenburg.html" target="_blank">M. Wahrenburg</a></div>
+        <div class="policy-venue">Study for the ECON Committee of the European Parliament / SAFE White Paper 84, 2021</div>
+    </div>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://safe-frankfurt.de/news-latest/safe-finance-blog/details/grants-vs-loans-equity-is-the-need-of-the-hour.html" target="_blank">Grants vs. Loans, but Equity is the Need of the Hour</a></div>
+        <div class="policy-authors">with <a href="https://www.uva.nl/en/profile/b/o/a.w.a.boot/a.w.a.boot.html" target="_blank">A. Boot</a>, <a href="https://www.unibocconi.it/en/faculty/elena-carletti" target="_blank">E. Carletti</a>, <a href="https://safe-frankfurt.de/policy-center/about/safe-senior-fellows/senior-fellows-hans-helmut-kotz.html" target="_blank">H.-H. Kotz</a>, <a href="https://safe-frankfurt.de/research/researchers/researchers-details/showauthor/14-krahnen.html" target="_blank">J.P. Krahnen</a>, <a href="https://safe-frankfurt.de/research/researchers/researchers-details/showauthor/82-pelizzon.html" target="_blank">L. Pelizzon</a> &amp; <a href="https://www.stern.nyu.edu/faculty/bio/marti-subrahmanyam" target="_blank">M. Subrahmanyam</a></div>
+        <div class="policy-venue">SAFE Finance Blog / NYU Stern Opinion, August 2020</div>
+    </div>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://safe-frankfurt.de/news-latest/safe-finance-blog/details/how-useful-are-financial-derivatives-in-public-debt-management.html" target="_blank">How Useful are Financial Derivatives in Public Debt Management</a></div>
+        <div class="policy-authors">with L. N&ouml;h &amp; <a href="https://www.wiwi.uni-frankfurt.de/de/abteilungen/ei/professoren/weichenrieder/team/prof-dr-alfons-j-weichenrieder.html" target="_blank">A. Weichenrieder</a></div>
+        <div class="policy-venue">SAFE Finance Blog, May 2020</div>
+    </div>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://doi.org/10.1515/pwp-2019-0035" target="_blank">Zins&auml;nderungsrisiken und langfristige Zinsbindung vor dem Hintergrund der hessischen Zinsswaps</a></div>
+        <div class="policy-authors">with L. N&ouml;h &amp; <a href="https://www.wiwi.uni-frankfurt.de/de/abteilungen/ei/professoren/weichenrieder/team/prof-dr-alfons-j-weichenrieder.html" target="_blank">A. Weichenrieder</a></div>
+        <div class="policy-venue">Perspektiven der Wirtschaftspolitik, 2020, 21(1), 79&ndash;89</div>
+    </div>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://safe-frankfurt.de/fileadmin/user_upload/SAFE_White_Paper_57.pdf" target="_blank">Wie viel Rente wirst du bekommen? &ndash; Pilotstudie zur Einf&uuml;hrung einer Renteninformationsplattform in Deutschland</a></div>
+        <div class="policy-authors">with <a href="https://www.bwl.uni-mannheim.de/bucher-koenen/" target="_blank">T. Bucher-Koenen</a>, <a href="https://www.old.wiwi.uni-frankfurt.de/de/abteilungen/finance/lehrstuhl/prof-dr-andreas-hackethal/team/prof-dr-hackethal.html" target="_blank">A. Hackethal</a> &amp; <a href="https://sites.google.com/site/christinexlaudenbach/" target="_blank">C. Laudenbach</a></div>
+        <div class="policy-venue">SAFE White Paper 57, October 2018</div>
+    </div>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://safe-frankfurt.de/fileadmin/user_upload/editor_common/Policy_Center/SAFE_Policy_Letter_No_67.pdf" target="_blank">Financial Stability in the EU: A Case for Micro Data Transparency</a></div>
+        <div class="policy-authors">with <a href="https://safe-frankfurt.de/research/researchers/researchers-details/showauthor/82-pelizzon.html" target="_blank">L. Pelizzon</a></div>
+        <div class="policy-venue">SAFE Policy Letter 67, February 2018</div>
+    </div>
+
+    <div class="policy-item">
+        <div class="policy-title"><a href="https://safe-frankfurt.de/policy-center/policy-publications/policy-publ-detailsview/publicationname/undermined-market-discipline-the-role-of-bank-rescues-and-bailout-expectations.html" target="_blank">Undermined Market Discipline: The Role of Bank Rescues and Bailout Expectations</a></div>
+        <div class="policy-authors">with <a href="https://digital.economics.uni-mainz.de/" target="_blank">F. Hett</a></div>
+        <div class="policy-venue">SAFE Policy Letter 59, September 2017</div>
+    </div>
+
+</section>
+
+
+<footer>
+    &copy; 2026 Johannes Kasinger &middot; Tilburg University
+</footer>
+
+<script>
+function toggleAbstract(btn) {
+    var abstractDiv = btn.parentElement.nextElementSibling;
+    if (abstractDiv && abstractDiv.classList.contains('abstract-text')) {
+        abstractDiv.classList.toggle('show');
+        btn.textContent = abstractDiv.classList.contains('show')
+            ? '[ \u2013 Abstract]'
+            : '[ + Abstract]';
+    }
+}
+</script>
+
+</body>
+</html>
