@@ -1,6 +1,10 @@
 # Claude Code session metadata
 .claude/
 
+# Editor / Dropbox temp files
+*.tmp
+*.tmp.*
+
 # OS junk
 Thumbs.db
 .DS_Store
